@@ -19,6 +19,20 @@ public class ProfessionnelController {
     ProfessionnelService professionnelService;
 
     // get all professionnels
+
+    @GetMapping("/admin/listProfessionnel")
+    public String listPro( Model model, @RequestParam(name = "page", defaultValue = "0") int page) {
+
+        // send list users
+        model.addAttribute("listUserActive", professionnelService.getAll( PageRequest.of(page, 10, Sort.by("firstName"))));
+
+        // send current page
+
+        model.addAttribute("currentPage", page);
+        return "admin/listPro";
+    }
+
+
     @GetMapping("/admin/gererPro")
     public String gererPro( Model model, @RequestParam(name = "page", defaultValue = "0") int page) {
 
