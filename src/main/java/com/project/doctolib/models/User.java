@@ -9,6 +9,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
+@Inheritance(strategy=InheritanceType.JOINED)
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class User {
     @Id
@@ -43,7 +44,7 @@ public class User {
     private String tel;
 
 
-    @Size(min = 6,max = 20 ,message = "mot de passe doit entre 6 et 20 caracters.")
+    @Size(min = 6,message = "mot de passe doit > 6  caracters.")
     @NotNull(message = "mot de passe  ne doit pas etre  null.")
     @NotBlank(message = "mot de passe ne doit pas etre  vide")
     private String password;

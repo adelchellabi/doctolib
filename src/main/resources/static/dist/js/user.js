@@ -8,13 +8,7 @@ $('document').ready(function () {
 
     });
 
-    $(".table #acceptBtn").on('click',function (event) {
-        event.preventDefault();
-        let href=$(this).attr('href');
-        $('#acceptRef').attr('href',href);
-        $('#acceptModal').modal()
 
-    })
     $(".table #blockedBtn").on('click',function (event) {
         event.preventDefault();
         let href=$(this).attr('href');
@@ -23,18 +17,6 @@ $('document').ready(function () {
 
     })
 
-    $(".table #detailsBtn").on('click',function (event) {
-        event.preventDefault();
-        let href = $(this).attr('href');
-        $.get(href,function (user,status) {
-            $('#nom').val(user.firstName);
-            $('#prenom').val(user.lastName);
-            $('#email').val(user.email);
 
-        });
-
-        $('#detailsModal').modal();
-
-    })
 
 })
