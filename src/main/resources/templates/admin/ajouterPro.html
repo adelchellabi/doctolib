@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>DoctoLib | Contact</title>
+    <title>Ajouter Pro</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Font Awesome -->
@@ -96,7 +96,7 @@
                        with font-awesome or any other icon font library -->
 
                     <li class="nav-item has-treeview">
-                        <a  href="/admin/addNewPro"  class="nav-link">
+                        <a href="/admin/addNewPro" class="nav-link">
                             <i class="nav-icon fas fa-user-nurse"></i>
                             <p>
                                 Creer Compte professionnel
@@ -188,12 +188,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0 text-dark">Demande d'adhésion</h1>
+                        <h1 class="m-0 text-dark">Ajouter Professionnel</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a th:href="@{/}">Accueil</a></li>
-                            <li class="breadcrumb-item active">Demande d'adhésion</li>
+                            <li class="breadcrumb-item active">Ajouter Professionnel</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -203,104 +203,114 @@
 
         <!-- Main content -->
         <section class="content">
-            <div class="row">
-                <div class="col-12">
-                    <div th:if="${contacts.isEmpty()}" class="card">
-                        <div class="card-header  text-center">
-                            <h2 class="text-info">La liste est vide !</h2>
-                        </div>
-                    </div>
-                    <div th:if="${!contacts.isEmpty()}" class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">Demande d'adhésion </h3>
+            <div class="container">
+                <div class="">
+                    <div class="card card-info">
+                        <div class="modal-header">
+                            <h3 class="modal-title">Ajouter Professionnel</h3>
+
+
                         </div>
                         <!-- /.card-header -->
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="table-responsive">
-                                        <table id="example2" class="table table-bordered table-hover">
-                                            <thead>
-                                            <tr>
-                                                <th scope="col">Prénom</th>
-                                                <th scope="col">Nom</th>
-                                                <th scope="col">Email</th>
-                                                <th scope="col">Tel</th>
-                                                <th scope="col">Message</th>
-                                                <th>Actions</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            <tr th:each="c : ${contacts.content}">
-                                                <td th:text="${c.prenom}"></td>
-                                                <td th:text="${c.nom}"></td>
-                                                <td th:text="${c.email}"></td>
-                                                <td th:text="${c.tel}"></td>
-                                                <td th:text="${c.message}"></td>
-                                                <td>&nbsp;&nbsp;
+                        <!-- form start -->
+                        <form name="formLogin" th:action="@{/admin/savePro}" method="post" th:object="${professionnel}" id="registerForm"
+                              class="form-horizontal">
+                            <div class="card-body">
+                                <div class="row ">
+                                    <span class="text-success m-auto pb-3" th:text="${result}"></span>
+                                </div>
+                                <div class="form-group row">
+                                    <span class="text-danger col-12 offset-3 " th:errors="*{lastName}"></span>
+                                    <label for="nom" class="col-sm-3 col-form-label">Nom</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" name="lastName" id="nom" placeholder="Nom"
+                                               data-error="nom should not be null" required th:field="*{lastName}">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <span class="text-danger offset-3 col-12" th:errors="*{firstName}"></span>
+                                    <label for="prenom" class="col-sm-3 col-form-label">Prenom</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" name="firstName" id="prenom"
+                                               placeholder="Prenom" data-error="prenom should not be null" required
+                                               th:field="*{firstName}">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <span class="text-danger offset-3 col-12 " th:errors="*{email}"></span>
+                                    <label for="inputEmail3" class="col-sm-3 col-form-label">Email</label>
+                                    <div class="col-sm-9">
+                                        <input type="email" class="form-control" name="email" id="inputEmail3"
+                                               placeholder="Email" required th:field="*{email}">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <span class="text-danger offset-3 col-12 " th:errors="*{username}"></span>
+                                    <span class="text-danger offset-3 col-12 " th:text="${usernameExist}"></span>
+                                    <label for="username" class="col-sm-3 col-form-label">Nom d'utilisateur</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" name="username" id="username"
+                                               placeholder="Username" required th:field="*{username}">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <span class="text-danger offset-3 col-12 " th:errors="*{tel}"></span>
+                                    <label for="username" class="col-sm-3 col-form-label">N° Tel</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" name="tel" id="tel"
+                                               placeholder="N° Tel" required th:field="*{tel}">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <span class="text-danger offset-3 col-12 " th:errors="*{adresse}"></span>
+                                    <label for="adresse" class="col-sm-3 col-form-label">Adresse</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" name="adresse" id="adresse"
+                                               placeholder="Adresse" required th:field="*{adresse}">
+                                    </div>
+                                </div>
 
-                                                    <a id="delBtn"
-                                                       th:href="@{/admin/demandeAdhesion/delete/(id=${c.id})}"><i
-                                                            class="fas fa-times-circle text-danger fa-lg"
-                                                            data-toggle="tooltip" data-placement="top"
-                                                            title="Supprimer"></i></a>
-                                                </td>
+                                <div class="form-group row">
+                                    <span class="text-danger offset-3 col-12 " th:errors="*{idSpecialite}"></span>
+                                    <label for="username" class="col-sm-3 col-form-label">Specialité</label>
+                                    <div class="col-sm-9">
 
-                                            </tr>
-                                            </tbody>
-                                        </table>
+                                        <select  class="form-control" name="idSpecialite" id="specialite"  required th:field="*{idSpecialite}">
+                                            <option th:each="s:${specialites}" th:value="${s.id}" th:text="${s.description}"></option>
+
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <span class="text-danger offset-3 col-12  " th:errors="*{password}"></span>
+                                    <label for="password" class="col-sm-3 col-form-label">Mot de passe</label>
+                                    <div class="col-sm-9">
+                                        <input type="password" class="form-control" name="password" id="password"
+                                               placeholder="Mot de passe" th:required="required">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="confirmPassword" class="col-sm-3 col-form-label">Confirmez le mot de passe</label>
+                                    <div class="col-sm-9">
+                                        <input type="password" id="confirmPassword" class="form-control"
+                                               placeholder="Confirmez le mot de passe">
                                     </div>
                                 </div>
                             </div>
-                            <div class="row  ">
-                                <div class="col-sm-12 col-md-5">
-                                    <div class="dataTables_info " id="example2_info" role="status" aria-live="polite">
-                                        <strong>Total :</strong> <span th:text="${contacts.totalElements}"></span>
-                                        Contacts
-                                    </div>
-                                </div>
-                                <div class="col-sm-12 col-md-7">
-                                    <nav aria-label="Page navigation example card-footer clearfix ">
-                                        <ul class="pagination m-0 float-right">
-                                            <li class="page-item"
-                                                th:classappend="${contacts.hasPrevious()}  ? '':'disabled'">
-                                                <a class="page-link"
-                                                   th:href="@{/admin/demandeAdhesion(page=${currentPage -1 })}"
-                                                   aria-label="Previous">
-                                                    <span aria-hidden="true">&laquo;</span>
-                                                    <span class="sr-only">Previous</span>
-                                                </a>
-                                            </li>
-                                            <li class="page-item  "
-                                                th:each="i:${#numbers.sequence(0,contacts.totalPages -1 )} "
-                                                th:classappend="${currentPage}==${i}?'active':''"
-                                                th:if="${!contacts.isEmpty()}">
-                                                <a
-                                                        class="page-link" th:href="@{/admin/demandeAdhesion(page=${i})}"
-                                                        th:text="${i+1}"
-                                                ></a></li>
-                                            <li class="page-item"
-                                                th:classappend="${contacts.hasNext()} ? '':'disabled'">
-                                                <a class="page-link"
-                                                   th:href="@{/admin/demandeAdhesion(page=${currentPage +1 })}"
-                                                   aria-label="Next">
-                                                    <span aria-hidden="true">&raquo;</span>
-                                                    <span class="sr-only">Next</span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </nav>
-                                </div>
+                            <!-- /.card-body -->
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-info" id="registerSubmit">Enregistrer</button>
+
 
                             </div>
-                        </div>
-                        <!-- /.card-body -->
+
+                        </form>
+
+
                     </div>
                 </div>
-                <!-- /.col -->
             </div>
-            <!-- /.row -->
-
         </section>
         <!-- /.content -->
     </div>
@@ -326,6 +336,25 @@
 <script src="../plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 <!-- AdminLTE App !!important-->
 <script src="../dist/js/adminlte.js"></script>
+<script>
+    $(document).ready(function () {
+        // verifier les mots de passes
+        let password = document.getElementById("password");
+        let confirmPassword = document.getElementById("confirmPassword");
+
+        function validatePassword() {
+            if (password.value != confirmPassword.value) {
+                confirmPassword.setCustomValidity("Password Don't Match");
+
+            } else {
+                confirmPassword.setCustomValidity('');
+            }
+        }
+
+        password.onchange = validatePassword;
+        confirmPassword.onkeyup = validatePassword;
+    })
+</script>
 
 </body>
 

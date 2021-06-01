@@ -96,7 +96,7 @@
                        with font-awesome or any other icon font library -->
 
                     <li class="nav-item has-treeview">
-                        <a href="/admin/index" class="nav-link">
+                        <a  href="/admin/addNewPro"  class="nav-link">
                             <i class="nav-icon fas fa-user-nurse"></i>
                             <p>
                                 Creer Compte professionnel
@@ -204,14 +204,21 @@
         <!-- Main content -->
         <section class="content">
         Content
-            <!-- /.row -->
+            <form action="/test">
+                <select name="langue" id="" multiple>
+                    <option th:value=1>Arabe</option>
+                    <option th:value=2>Francais</option>
+                    <option th:value=3>Anglais</option>
+                  <input th:type="submit">
+                </select>
+            </form>
 
         </section>
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
     <footer class="main-footer text-center ">
-        <strong>Copyright &copy; 2020-2021 <a href="AdelHouda">Adel Chelabi</a>.</strong>
+        <strong>Copyright &copy; 2020-2021 <a href="https://www.linkedin.com/in/adel-chelabi-821b69195">Adel Chelabi</a>.</strong>
         All rights reserved.
 
     </footer>

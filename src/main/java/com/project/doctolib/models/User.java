@@ -41,6 +41,14 @@ public class User {
     @NotNull(message = "Email ne doit pas etre  null.")
     private String email;
 
+    public String getTel() {
+        return tel;
+    }
+
+    public void setTel(String tel) {
+        this.tel = tel;
+    }
+
     private String tel;
 
 

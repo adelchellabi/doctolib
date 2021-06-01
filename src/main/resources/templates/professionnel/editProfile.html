@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Modifie profil</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+
+    <!-- Theme style !important -->
+    <link rel="stylesheet" href="../dist/css/adminlte.min.css">
+    <!-- overlayScrollbars !important -->
+    <link rel="stylesheet" href="../plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+</head>
+
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+
+    <!-- Navbar -->
+    <nav class="main-header navbar navbar-expand navbar-dark navbar-info">
+        <!-- Left navbar links -->
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+            </li>
+            <li class="nav-item d-none d-sm-inline-block">
+                <a href="/admin/index" class="nav-link">Accueil</a>
+            </li>
+            <li class="nav-item d-none d-sm-inline-block">
+                <a href="#" class="nav-link">Contact</a>
+            </li>
+        </ul>
+
+        <!-- SEARCH FORM -->
+        <form class="form-inline ml-3">
+            <div class="input-group input-group-sm">
+                <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+                <div class="input-group-append">
+                    <button class="btn btn-navbar" type="submit">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
+
+        <!-- Right navbar links -->
+        <ul class="navbar-nav ml-auto">
+
+            <!-- Notifications Dropdown Menu -->
+            <li class="nav-item dropdown  ">
+                <a class="nav-link" data-toggle="dropdown" href="#">
+                    <i class="far fa-bell fa-lg"></i>
+                    <span class="badge badge-warning navbar-badge"></span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                    <span class="dropdown-item dropdown-header"
+                          th:text=" ' '  + ' Notifications'"></span>
+
+                </div>
+            </li>
+        </ul>
+    </nav>
+    <!-- /.navbar -->
+
+    <!-- Main Sidebar Container -->
+    <aside class="main-sidebar sidebar-light-blue elevation-4">
+        <!-- Brand Logo -->
+        <a href="/" class="brand-link navbar-brand">
+            <span class="brand-text  text-info ml-3">DoctoLib</span>
+        </a>
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <!-- Sidebar user panel (optional) -->
+            <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                <div class="image">
+                    <img src="../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+                </div>
+                <div class="info">
+                    <a href="#" class="d-block" th:text="${session.user.username}" th:unless="${session==null}"> </a>
+                </div>
+            </div>
+
+            <!-- Sidebar Menu -->
+            <nav class="mt-2">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                    data-accordion="false">
+                    <!-- Add icons to the links using the .nav-icon class
+                       with font-awesome or any other icon font library -->
+
+                    <li class="nav-item has-treeview">
+                        <a  href="/admin/addNewPro"  class="nav-link">
+                            <i class="nav-icon fas fa-user-nurse"></i>
+                            <p>
+                                Creer Compte professionnel
+                            </p>
+                        </a>
+                    </li>
+
+                    <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-tasks"></i>
+                            <p>
+                                Gerer Compte
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+
+                            <li class="nav-item">
+                                <a th:href="@{/admin/gererPro}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p> Professionnels </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a th:href="@{/admin/gererPatient}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p> Patients </p>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+                    <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-eye"></i>
+                            <p>
+                                Consulter
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a th:href="@{/admin/listProfessionnel}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Liste des Professionnels </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/admin/demandeAdhesion" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Demande d'adhésion</p>
+                                </a>
+                            </li>
+
+
+                        </ul>
+                    </li>
+
+                    <li class="nav-header">Profil</li>
+
+                    <li class="nav-item">
+                        <a th:href="@{/professionnel/editProfil}" class="nav-link">
+                            <i class="nav-icon fas fa-user-edit"></i>
+                            <p>
+                                Editer Profil
+                            </p>
+                        </a>
+                    </li>
+
+                    <li class="nav-header">Session</li>
+                    <li class="nav-item">
+                        <a href="/logout" class="nav-link">
+                            <i class="nav-icon fas fa-arrow-circle-right"></i>
+
+                            <p>Déconnexion</p>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <!-- /.sidebar-menu -->
+        </div>
+        <!-- /.sidebar -->
+    </aside>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0 text-dark">Modifie profil</h1>
+                    </div><!-- /.col -->
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a th:href="@{/}">Accueil</a></li>
+                            <li class="breadcrumb-item active">Modifie profil</li>
+                        </ol>
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </div>
+        <!-- /.content-header -->
+
+        <!-- Main content -->
+<div class="content">
+    <div class="container">
+        <div class="row ">
+            <div class=" col-12 col-sm-4 card mr-2">
+                <div class="card-body">
+                    <h3 class="text-info">Formations</h3>
+                    <ul>
+                        <li class="text-muted" th:each="f:${formations}" th:text="${f.annee} +' - '+ ${f.getTitre()}"> </li>
+                    </ul>
+                    <button class="btn btn-sm btn-info" id="btn-formation" data-toggle="modal"  data-target="#formationModal">Ajouter</button>
+                    <hr>
+                    <h3 class="text-info">Expérience</h3>
+                    <ul>
+                        <li th:each="e:${experiances}" th:text="${e.description} " class="text-muted"> </li>
+                    </ul>
+                    <button class="btn btn-sm btn-info" id="btn-experiance" data-toggle="modal"  data-target="#experianceModal">Ajouter</button>
+                    <hr>
+                    <h3 class="text-info">Langues parlées</h3>
+                    <ul>
+                        <li th:each="l:${langues}" th:text="${l.description} " class="text-muted"> </li>
+                    </ul>
+                    <button class="btn btn-sm btn-info" id="btn-langues" data-toggle="modal"  data-target="#languesModal">Ajouter</button>
+                </div>
+            </div>
+            <div class="col-12 col-sm-7  card">
+            <div class="card-body">
+                <form th:action="@{/professionnel/update(id=${session.user.id})}" method="post" th:object="${user}"
+                      id="registerForm"
+                      class="form-horizontal">
+                    <div class="card-body">
+                        <div class="row ">
+                            <span class="text-success m-auto pb-3" th:text="${result}"></span>
+                        </div>
+                        <div class="form-group row">
+
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" name="id" id="id" hidden placeholder="id"
+                                       data-error="nom should not be null" required readonly th:field="*{id}">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <span class="text-danger col-12 offset-2  " th:errors="*{lastName}"></span>
+                            <label for="nom" class="col-sm-2 col-form-label">Nom</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" name="lastName" id="nom" placeholder="Nom"
+                                       data-error="nom should not be null" required th:field="*{lastName}">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <span class="text-danger offset-2 col-12" th:errors="*{firstName}"></span>
+                            <label for="prenom" class="col-sm-2 col-form-label">Prenom</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" name="firstName" id="prenom"
+                                       placeholder="Prenom" rdata-error="prenom should not be null" required
+                                       th:field="*{firstName}">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <span class="text-danger offset-2 col-12 " th:errors="*{email}"></span>
+                            <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
+                            <div class="col-sm-6">
+                                <input type="email" class="form-control" name="email" id="inputEmail3"
+                                       placeholder="Email" required th:field="*{email}">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <span class="text-danger offset-2 col-12 " th:errors="*{username}"></span>
+
+                            <label for="username" class="col-sm-2 col-form-label">Username</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" name="username" id="username" readonly
+                                       placeholder="Username" required th:field="*{username}">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <span class="text-danger offset-2 col-12  " th:errors="*{password}"></span>
+                            <label for="password" class="col-sm-2 col-form-label">Password</label>
+                            <div class="col-sm-6">
+                                <input type="password" class="form-control" name="password" id="password"
+                                       placeholder="Password" th:required="required">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="confirmPassword" class="col-sm-2 col-form-label">Confirm Password</label>
+                            <div class="col-sm-6">
+                                <input type="password" id="confirmPassword" class="form-control"
+                                       placeholder="Confirm Password">
+                            </div>
+                        </div>
+                        <div class="row form-group ">
+                            <button  type="submit" class="btn btn-info col-sm-2 " id="registerSubmit">Save</button>
+
+
+                        </div>
+                    </div>
+                    <!-- /.card-body -->
+
+
+                </form>
+            </div>
+        </div></div>
+    </div>
+</div>
+
+
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+    <footer class="main-footer text-center ">
+        <strong>Copyright &copy; 2020-2021 <a href="https://www.linkedin.com/in/adel-chelabi-821b69195">Adel Chelabi</a>.</strong>
+        All rights reserved.
+
+    </footer>
+</div>
+<!--Modals-->
+<div class="modal fade" id="formationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="card card-info">
+                <div class="modal-header">
+                    <h3 class="modal-title">Ajouter Formation </h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <!-- /.card-header -->
+                <!-- form start -->
+                <form th:action="@{/professionnel/saveFormation}" method="post" th:object="${formation}">
+                    <div class="card-body">
+                        <div class="form-group row">
+                            <span class="text-danger col-12 offset-3 " th:errors="*{titre}" required></span>
+                            <label for="titre" class="col-sm-3 col-form-label">Titre</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="titre" class="form-control" id="titre" th:field="*{titre}"
+                                       placeholder="Titre">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <span class="text-danger col-12 offset-3 " th:errors="*{annee}"></span>
+                            <label for="annee" class="col-sm-3 col-form-label">Annee</label>
+                            <div class="col-sm-9">
+
+                                <select class="form-control" name="annee" id="annee" required>
+                                    <option th:each="y:${years}" th:text="${y}" th:value="${y}" ></option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.card-body -->
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-info">Ajouter</button>
+
+                        <button type="button" class="btn btn-secondary float-right"
+                                data-dismiss="modal">Annuler
+                        </button>
+                    </div>
+                    <!-- /.card-footer -->
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="experianceModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="card card-info">
+                <div class="modal-header">
+                    <h3 class="modal-title">Ajouter Expérience </h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <!-- /.card-header -->
+                <!-- form start -->
+                <form th:action="@{/professionnel/saveExperience}" method="post" th:object="${experiance}">
+                    <div class="card-body">
+                        <div class="form-group row">
+                            <span class="text-danger col-12 offset-3 " th:errors="*{description}"></span>
+                            <label for="description" class="col-sm-3 col-form-label">Description</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="description" class="form-control" id="description" required th:field="*{description}"
+                                       placeholder="Description">
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- /.card-body -->
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-info">Ajouter</button>
+
+                        <button type="button" class="btn btn-secondary float-right"
+                                data-dismiss="modal">Annuler
+                        </button>
+                    </div>
+                    <!-- /.card-footer -->
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="languesModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="card card-info">
+                <div class="modal-header">
+                    <h3 class="modal-title">Selectionnez Langues </h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <!-- /.card-header -->
+                <!-- form start -->
+
+                <form th:action="@{/professionnel/saveLangues}" method="get" >
+                    <div class="card-body">
+                        <div class="form-group row">
+                            <span class="text-danger col-12 offset-3 " ></span>
+                            <label for="description" class="col-sm-3 col-form-label">Langues parlées</label>
+                            <div class="col-sm-9">
+                                <select name="langue" id="" multiple>
+                                    <option th:each="l:${allLanguages}" th:text="${l.description}" th:value="${l.id}">Arabe</option>
+
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- /.card-body -->
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-info">Ajouter</button>
+
+                        <button type="button" class="btn btn-secondary float-right"
+                                data-dismiss="modal">Annuler
+                        </button>
+                    </div>
+                    <!-- /.card-footer -->
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- jQuery -->
+<script src="../plugins/jquery/jquery.min.js"></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="../plugins/jquery-ui/jquery-ui.min.js"></script>
+
+<!-- Bootstrap 4 -->
+<script src="../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Summernote -->
+<script src="../plugins/summernote/summernote-bs4.min.js"></script>
+<!-- overlayScrollbars -->
+<script src="../plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<!-- AdminLTE App !!important-->
+<script src="../dist/js/adminlte.js"></script>
+<script type="text/javascript">
+
+</script>
+</body>
+
+</html>
